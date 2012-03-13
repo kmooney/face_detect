@@ -8,13 +8,11 @@ cascade_file_path = '/usr/local/share/opencv/haarcascades/'
 
 cascade_files = [
     'haarcascade_frontalface_alt.xml',
-    'haarcascade_profileface.xml',  
     'haarcascade_mcs_eyepair_big.xml',
 ]
 
 detector_names = [
     'face',
-    'profile',
     'eyes',
 ]
 
@@ -73,9 +71,9 @@ def capture_draw():
         FEATURE_SCALE = ( float(roi_image.width) / ROI_TARGET_SIZE[0],  float(roi_image.height) / ROI_TARGET_SIZE[1])
         roi_thumb = cv.CreateImage((int(roi_image.width / FEATURE_SCALE[0]), int(roi_image.height / FEATURE_SCALE[1])), cv.IPL_DEPTH_8U, 3)
         cv.Resize(roi_image, roi_thumb)
-        cv.ShowImage("ROI", roi_image)
 
         features = get_features(roi_thumb)
+        cv.ShowImage("ROI", roi_image)
         for name in features:
             if features[name] != None:
                 for (x1,y1,w1,h1), n1 in features[name]:
